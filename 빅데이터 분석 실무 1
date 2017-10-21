@@ -1,65 +1,711 @@
-# R 실행  source 창에서 실행 : 블럭 설정하고 ctrl+enter# R console 창 클리어 : source 창에서 ctrl+L# 모든 변수제거 rm(list=ls()) 
-install.packages("package_name") # 패키지 설치library(package_name) # 패키지 이용시 실행vignette("package_name") # 패키지에 대한 간단한 설명을 pdf파일로 볼 수 있
-file.create("file_name.R") # working directory에 R파일 생성file.edit("file_name.R") # 파일 수정source("file_name.R") # 파일에 저장한 코드를 실행하기 위해 해줌
-# ----------------------------------------------------------------------------------------------------# R  기본 셋 : http://blog.naver.com/PostView.nhn?blogId=sorwd2001&logNo=220575760129&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView
-# http://blog.naver.com/beyondanova/220947740863
-# R 공공 자료처리 : http://blog.naver.com/liberty264/220627758839# Word cloud site http://blog.naver.com/liberty264/220616866103
-# http://blog.naver.com/beyondanova/220947740863
-# # ----------------------------------------------------------------------------------------------------
-# ------------------------------ 2017_2_기초3# 데이터 분석 기초# 데이터 파악용 함수 : head()  tail()  View()  dim()  str()   summary()exam <- read.csv("csv_exam.csv")data.frame(exam) # 데이터 전체출력head(exam) # 데이터의 일부만 출력 head(exam, 10) # 데이터 프레임의 경우 ", 숫자" 지정하여 일부 표현 가능tail(exam) # 데이터 뒷부분 확인하기tail(exam, 5) # 데이터 뒷부분 중, 원하는 줄만큼 확인 가능View(exam) # 엑셀과 유사한 창으로 자료를 보여줌dim(exam) # 구성 행렬 크기 str(exam) # 데이터 속성 확인summary(exam) #요약된 통계량 표시# Min(최솟값), 1st Qu(1사분위수 ; 하위 25%지점에 위치하는 값), Meadian(중앙위치값), Mean(평균값), # 3rd Qu(하위 75%지점에 위치하는 값), Max(최댓값)
-# 과제 : 빅데이터 분석을 위한 1차 작업은 수집된 자료의 분석# 2차 작업 : 필요한 자료 추출, 즉 가공작업# 3차 작업 : 정량분석 - 가시화 도구# 4차 작업 : 정성분석 - 신뢰성 평가/검정
-# ------------------------------------------------rm(list=ls())  # 작업한 모든 변수 clearls()objects()# http://blog.naver.com/sw4r/220947662194   꼭 읽어보기# http://blog.naver.com/sw4r/220947636803# 객체 - 1개 1개의 자료, 객체의 나열 - list  # 객체의 자료구조 - 7가지(스칼러, 벡터, 행렬, 배열, 리스트, 팩터, 데이터프레임)   # http://blog.naver.com/sw4r/220947706818
-# ------------------------------------------------# 지그드시 blog# http://blog.naver.com/liberty264/220999922431# http://blog.naver.com/liberty264/220984298909  R 기초 # http://blog.naver.com/liberty264/220992998669  R 통계
-# 그래프 그리기 ggpplot2, lattice, qplot(), ggmap, 
-# http://blog.naver.com/liberty264/221004390848 ggplot2 패키지  그래프 작성에 가장 많이 활용# http://blog.naver.com/liberty264/221064041168 lattice패키지 활용 그래프 작성# http://blog.naver.com/liberty264/221065202687 qplot() 패키지# http://blog.naver.com/liberty264/221065408166 ggmap 패키지# http://blog.naver.com/liberty264 3차원 산점도# http://blog.naver.com/liberty264/221018193084 구글 chart# http://blog.naver.com/liberty264/220982348293 Box plot# http://blog.naver.com/liberty264/220751221418 그해픽 함수
-options(digits=5)4/3
-# 데이터 구조 ## 벡터 : 1차원 : 한가지 변수 타입으로 구성# 데이터 프레임 : 2차원 : 다양한 변수 타입으로 구성# 매트릭스(matrix) : 2차원 : 한가지 변수 타입으로 구성# 어레이(Array) : 다차원 : 2차원 이상의 매트릭스# 리스트(list) : 다차원 : 서로 다른 데이터 구조 포함
-# 1. 벡터a <- 1aclass(a)  # 데이터 구조 확인
-b <- "Hello"bclass(b)   # 데이터 구조 확인
-# 2. 데이터 프레임x1 <- data.frame(var1 = c(1,2,3),                 var2 = c("a", "b", "c"))x1class(x1)
-# 3. 매트릭스(matrix)x2 <- matrix(c(1:12), ncol=2)x2class(x2)
-# 4. 어레이(Arrary)x3 <- array(1:20, dim=c(2,5,2))x3      # 2핼 5열이 2개class(x3)
-# 5. 리스트 (list)x4 <- list(f1 = a,           f2 = x1,           f3 = x2,           f4 = x3)x4class(x4)
-mpg <- ggplot2 :: mpgx <- boxplot(mpg$cty)x
-x$stats[,1]       # 요약 통계량x$stats[,1][3]    # 중앙값 추출x$stats[,1][2]    # 1분위수 추출
-# https://www.statmethods.net/   R 신속 학습
-# 공공데이터 포털 www.data.go.kr# 서울 열린데이터 광장 http://data.seoul.go.kr# 한지복지패널 http://koweps.re.kr
- 
-# ---------------------------------------------------------------------------------------------survey <- c(100.023, 101.014, 99.921, 100.011, 100.001, 99.987, 99.999, 99.823, 100.092,99.876, 100.103)boxplot(survey)
-# 이상치를 결측값으로 처리하기survey <- ifelse(survey > 100.5, NA, survey)surveymean(survey)
-table(is.na(survey))
-# 이제 결측치 제외하고 분석하기mean(survey, na.rm = T)
-## 이상치 제거하기 - 극단적인 값  상자그림(box plot)활용 검출 : 극단치 경계값을 +- 초과하는 객체# 상자그림 설명# 상자그림                값                  설명# 상자아래 세로점선       아랫수염            하위 0-25% 내에 해당하는 값# 상자밑면                1사분위수(Q1)       하위 25% 위치값# 상자내 굵은 선          2사분위수(Q2)       하위 50% 위치값(중앙값)# 상자윗면                3사분위수(Q3)       하위 75% 위치값# 상자 위 세로 점선       윗수염              하위 75-100% 내에 해당하는 값# 상자 밖 가로선          극단치 경계         Q1, Q3 밖 1.5 IQR 내 최댓값# 상자 밖 점 표식         극단치              Q1, Q3 밖 1.5 IQR를 벅어난 값
-# 1.5 IQR : 4분위 범위(Q1-Q3 간 거리)의 1.5배
-boxplot(mpg$hwy)
-boxplot(mpg$hwy)$stats# 출력값 의미(위에서 아래 방향으로)# 아래쪽 극단치 경계# 1사 분위수# 중앙값# 3사분위수# 위쪽 극단치 경계        #12-37 범위 이외값은 이상치
 
-# ---------------------# 실전 공공데이터 분석# ---------------------
-# 데이터 준비 bit.ly/doit_rb ;<https://github.com/youngwoos/Doit_R/#91># 다운로드 koweps_hpc10_2015_beta1.sav 다운오드 : 2016년 발간된 복지 패널데이터(6914가구, 16664명정보)# https://www.koweps.re.kr 한국복지패널 회원가입 후, https://www.koweps.re.kr:442/data/data/list.do# gpsgis  gnssuav7# # 통계 sw인 SPSS, SAS, STATA dml vkdlfdmf qnffjdhf tn dlTsms rlsmd : 패키지 foreign 설치install.packages("foreign")library(foreign) # SPSS 파일 불러오기library(dplyr) # 전처리library(ggplot2) # 시각화library(readxl) # 엑셀파일 불러오기
-# 데이터 불러오기raw_welfare <- read.spss(file = "Koweps_hpc10_2015_beta1.sav",                         to.data.frame = T) # 복사본 만들기welfare <- raw_welfare
-# 데이터 검토하기View(welfare)head(welfare)tail(welfare)dim(welfare)str(welfare)summary(welfare)
-# 변수명 바꾸기welfare <- rename(welfare,                  sex = h10_g3,              # 성별                  birth = h10_g4,            # 태어난 년도                  marriage = h10_g10,        # 혼인 상태                    religion = h10_g11,        # 종교                  income = p1002_8aq1,       # 월급                    code_job = h10_eco9,       # 직업 코드                    code_region = h10_reg7)    # 지역 코드
-# 데이터 분석절차# 1단계 : 변수 검토 및 전처리 (결측치 수정, 이상치 제거)# 2단계 : 변수간 관계분석 (요약표만들기, 그래프 만들기)
-# 변수 검토하기class(welfare$sex)table(welfare$sex) # 1(남)-7578명, 2(여)-9086명
-# sex가 1, 2 이외의 경우는 이상치,  9(모름/무응답) # 이상치 결측 처리welfare$sex <- ifelse(welfare$sex == 9, NA, welfare$sex)
-# 결측치 확인table(is.na(welfare$sex))# 확인결과 결측치가 없음 이상없음
-# sex 변수의 값은 숫자 1과 2로 되어 있음, 이것을 정상적으로 "male", "female"로 바꾸고# table(), qplot()을 이용해 반영결과를 확인한다.welfare$sex <- ifelse(welfare$sex == 1, "male", "female")table(welfare$sex)
+
+# R 실행  source 창에서 실행 : 블럭
+설정하고 ctrl+enter
+
+# R console 창 클리어 :
+source 창에서 ctrl+L
+
+# 모든 변수제거
+rm(list=ls()) 
+
+ 
+
+install.packages("package_name")
+# 패키지 설치
+
+library(package_name) # 패키지 이용시 실행
+
+vignette("package_name") # 패키지에
+대한 간단한 설명을 pdf파일로 볼 수 있
+
+ 
+
+file.create("file_name.R") #
+working directory에 R파일 생성
+
+file.edit("file_name.R") # 파일
+수정
+
+source("file_name.R") # 파일에
+저장한 코드를 실행하기 위해 해줌
+
+ 
+
+#
+----------------------------------------------------------------------------------------------------
+
+# R  기본
+셋 : http://blog.naver.com/PostView.nhn?blogId=sorwd2001&logNo=220575760129&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView
+
+ 
+
+#
+http://blog.naver.com/beyondanova/220947740863
+
+ 
+
+# R 공공 자료처리 :
+http://blog.naver.com/liberty264/220627758839
+
+# Word cloud site
+http://blog.naver.com/liberty264/220616866103
+
+ 
+
+#
+http://blog.naver.com/beyondanova/220947740863
+
+ 
+
+# 
+
+#
+----------------------------------------------------------------------------------------------------
+
+ 
+
+# ------------------------------ 2017_2_기초3
+
+# 데이터 분석 기초
+
+# 데이터 파악용 함수 :
+head()  tail()  View() 
+dim()  str()   summary()
+
+exam <-
+read.csv("csv_exam.csv")
+
+data.frame(exam) # 데이터 전체출력
+
+head(exam) # 데이터의 일부만 출력 
+
+head(exam, 10) # 데이터 프레임의 경우 ", 숫자" 지정하여 일부 표현 가능
+
+tail(exam) # 데이터 뒷부분 확인하기
+
+tail(exam, 5) # 데이터 뒷부분 중, 원하는 줄만큼 확인 가능
+
+View(exam) # 엑셀과 유사한 창으로 자료를 보여줌
+
+dim(exam) # 구성 행렬 크기 
+
+str(exam) # 데이터 속성 확인
+
+summary(exam) #요약된 통계량 표시
+
+# Min(최솟값), 1st
+Qu(1사분위수 ; 하위 25%지점에 위치하는
+값), Meadian(중앙위치값), Mean(평균값), 
+
+# 3rd Qu(하위 75%지점에
+위치하는 값), Max(최댓값)
+
+ 
+
+# 과제 : 빅데이터 분석을
+위한 1차 작업은 수집된 자료의 분석
+
+# 2차 작업 : 필요한
+자료 추출, 즉 가공작업
+
+# 3차 작업 : 정량분석 - 가시화 도구
+
+# 4차 작업 : 정성분석 - 신뢰성 평가/검정
+
+ 
+
+#
+------------------------------------------------
+
+rm(list=ls())  # 작업한 모든 변수 clear
+
+ls()
+
+objects()
+
+# http://blog.naver.com/sw4r/220947662194   꼭 읽어보기
+
+# http://blog.naver.com/sw4r/220947636803
+
+# 객체 - 1개 1개의 자료, 객체의 나열 -
+list  
+
+# 객체의 자료구조 - 7가지(스칼러, 벡터, 행렬, 배열, 리스트, 팩터, 데이터프레임)  
+
+
+# http://blog.naver.com/sw4r/220947706818
+
+ 
+
+#
+------------------------------------------------
+
+# 지그드시 blog
+
+# http://blog.naver.com/liberty264/220999922431
+
+#
+http://blog.naver.com/liberty264/220984298909 
+R 기초 
+
+#
+http://blog.naver.com/liberty264/220992998669 
+R 통계
+
+ 
+
+# 그래프 그리기 ggpplot2,
+lattice, qplot(), ggmap, 
+
+ 
+
+#
+http://blog.naver.com/liberty264/221004390848 ggplot2 패키지  그래프 작성에 가장 많이 활용
+
+#
+http://blog.naver.com/liberty264/221064041168 lattice패키지 활용 그래프 작성
+
+#
+http://blog.naver.com/liberty264/221065202687 qplot() 패키지
+
+#
+http://blog.naver.com/liberty264/221065408166 ggmap 패키지
+
+# http://blog.naver.com/liberty264 3차원
+산점도
+
+#
+http://blog.naver.com/liberty264/221018193084 구글 chart
+
+#
+http://blog.naver.com/liberty264/220982348293 Box plot
+
+#
+http://blog.naver.com/liberty264/220751221418 그해픽 함수
+
+ 
+
+ 
+
+options(digits=5)
+
+4/3
+
+ 
+
+# 데이터 구조 #
+
+# 벡터 : 1차원 : 한가지 변수 타입으로 구성
+
+# 데이터 프레임 : 2차원 : 다양한 변수 타입으로 구성
+
+# 매트릭스(matrix) : 2차원 : 한가지 변수 타입으로 구성
+
+# 어레이(Array) : 다차원 : 2차원 이상의 매트릭스
+
+# 리스트(list) : 다차원 : 서로 다른 데이터 구조 포함
+
+ 
+
+# 1. 벡터
+
+a <- 1
+
+a
+
+class(a) 
+# 데이터 구조 확인
+
+ 
+
+b <- "Hello"
+
+b
+
+class(b)  
+# 데이터 구조 확인
+
+ 
+
+# 2. 데이터 프레임
+
+x1 <- data.frame(var1 = c(1,2,3),
+
+                 var2 = c("a",
+"b", "c"))
+
+x1
+
+class(x1)
+
+ 
+
+ 
+
+# 3. 매트릭스(matrix)
+
+x2 <- matrix(c(1:12), ncol=2)
+
+x2
+
+class(x2)
+
+ 
+
+ 
+
+# 4. 어레이(Arrary)
+
+x3 <- array(1:20, dim=c(2,5,2))
+
+x3     
+# 2핼 5열이 2개
+
+class(x3)
+
+ 
+
+# 5. 리스트 (list)
+
+x4 <- list(f1 = a,
+
+          
+f2 = x1,
+
+          
+f3 = x2,
+
+          
+f4 = x3)
+
+x4
+
+class(x4)
+
+ 
+
+ 
+
+mpg <- ggplot2 :: mpg
+
+x <- boxplot(mpg$cty)
+
+x
+
+ 
+
+ 
+
+x$stats[,1]       # 요약 통계량
+
+x$stats[,1][3]    # 중앙값 추출
+
+x$stats[,1][2]    # 1분위수 추출
+
+ 
+
+ 
+
+# https://www.statmethods.net/   R 신속 학습
+
+ 
+
+# 공공데이터 포털
+www.data.go.kr
+
+# 서울 열린데이터 광장
+http://data.seoul.go.kr
+
+# 한지복지패널
+http://koweps.re.kr
+
+ 
+
+ 
+
+ 
+
+#
+---------------------------------------------------------------------------------------------
+
+survey <- c(100.023, 101.014, 99.921,
+100.011, 100.001, 99.987, 99.999, 99.823, 100.092,99.876, 100.103)
+
+boxplot(survey)
+
+ 
+
+# 이상치를 결측값으로 처리하기
+
+survey <- ifelse(survey > 100.5, NA,
+survey)
+
+survey
+
+mean(survey)
+
+ 
+
+table(is.na(survey))
+
+ 
+
+# 이제 결측치 제외하고 분석하기
+
+mean(survey, na.rm = T)
+
+ 
+
+ 
+
+## 이상치 제거하기 - 극단적인
+값  상자그림(box plot)활용 검출 : 극단치 경계값을 +- 초과하는 객체
+
+# 상자그림 설명
+
+# 상자그림                값                  설명
+
+# 상자아래 세로점선       아랫수염            하위 0-25% 내에
+해당하는 값
+
+# 상자밑면                1사분위수(Q1)       하위 25% 위치값
+
+# 상자내 굵은 선          2사분위수(Q2)       하위 50% 위치값(중앙값)
+
+# 상자윗면                3사분위수(Q3)       하위 75% 위치값
+
+# 상자 위 세로 점선       윗수염              하위
+75-100% 내에 해당하는 값
+
+# 상자 밖 가로선          극단치 경계         Q1, Q3 밖 1.5
+IQR 내 최댓값
+
+# 상자 밖 점 표식         극단치              Q1, Q3 밖
+1.5 IQR를 벅어난 값
+
+ 
+
+# 1.5 IQR : 4분위 범위(Q1-Q3
+간 거리)의 1.5배
+
+ 
+
+boxplot(mpg$hwy)
+
+ 
+
+boxplot(mpg$hwy)$stats
+
+# 출력값 의미(위에서
+아래 방향으로)
+
+# 아래쪽 극단치 경계
+
+# 1사 분위수
+
+# 중앙값
+
+# 3사분위수
+
+# 위쪽 극단치 경계        #12-37 범위 이외값은 이상치
+
+ 
+
+ 
+
+ 
+
+# ---------------------
+
+# 실전 공공데이터 분석
+
+# ---------------------
+
+ 
+
+# 데이터 준비
+bit.ly/doit_rb ;<https://github.com/youngwoos/Doit_R/#91>
+
+# 다운로드
+koweps_hpc10_2015_beta1.sav 다운오드 : 2016년 발간된 복지 패널데이터(6914가구, 16664명정보)
+
+# https://www.koweps.re.kr 한국복지패널 회원가입
+후, https://www.koweps.re.kr:442/data/data/list.do
+
+# gpsgis 
+gnssuav7
+
+# 
+
+# 통계 sw인 SPSS, SAS, STATA dml vkdlfdmf qnffjdhf tn dlTsms rlsmd : 패키지 foreign 설치
+
+install.packages("foreign")
+
+library(foreign) # SPSS 파일 불러오기
+
+library(dplyr) # 전처리
+
+library(ggplot2) # 시각화
+
+library(readxl) # 엑셀파일 불러오기
+
+ 
+
+# 데이터 불러오기
+
+raw_welfare <- read.spss(file =
+"Koweps_hpc10_2015_beta1.sav",
+
+                         to.data.frame = T)
+
+ 
+
+# 복사본 만들기
+
+welfare <- raw_welfare
+
+ 
+
+# 데이터 검토하기
+
+View(welfare)
+
+head(welfare)
+
+tail(welfare)
+
+dim(welfare)
+
+str(welfare)
+
+summary(welfare)
+
+ 
+
+# 변수명 바꾸기
+
+welfare <- rename(welfare,
+
+                  sex = h10_g3,              # 성별
+
+                  birth = h10_g4,            # 태어난 년도
+
+                  marriage = h10_g10,        # 혼인 상태  
+
+                  religion = h10_g11,        # 종교
+
+                  income = p1002_8aq1,       # 월급  
+
+                  code_job = h10_eco9,       # 직업 코드  
+
+                  code_region = h10_reg7)    # 지역 코드
+
+ 
+
+# 데이터 분석절차
+
+# 1단계 : 변수 검토
+및 전처리 (결측치 수정, 이상치 제거)
+
+# 2단계 : 변수간 관계분석 (요약표만들기, 그래프 만들기)
+
+ 
+
+# 변수 검토하기
+
+class(welfare$sex)
+
+table(welfare$sex) # 1(남)-7578명, 2(여)-9086명
+
+ 
+
+# sex가 1, 2 이외의
+경우는 이상치,  9(모름/무응답) 
+
+# 이상치 결측 처리
+
+welfare$sex <- ifelse(welfare$sex == 9,
+NA, welfare$sex)
+
+ 
+
+# 결측치 확인
+
+table(is.na(welfare$sex))
+
+# 확인결과 결측치가 없음 이상없음
+
+ 
+
+# sex 변수의 값은 숫자 1과 2로 되어 있음, 이것을 정상적으로
+"male", "female"로 바꾸고
+
+# table(), qplot()을 이용해 반영결과를 확인한다.
+
+welfare$sex <- ifelse(welfare$sex == 1,
+"male", "female")
+
+table(welfare$sex)
+
+ 
+
 qplot(welfare$sex) # 성별 전처리 작업 완료
-### 가. 성별에 따른 월급 차이  ------- 성별에 따라 월급이 다를까 ?  ------------# 다음으로 월급변수의 전처리 작업을 수행한다.
-# 1. 월급변수 검토 및 전처리 : 기준단위 1만원class(welfare$income)summary(welfare$income)qplot(welfare$income)# qplot() : 최댓값까지 표현됨, 0-1000까지만 표현되게 설정해보자qplot(welfare$income) + xlim(0,1000)
-# 2. 전처리# 월급은 1-9998 사이값, 모름 또는 무응답은 9999로 코딩된 상태로 조사되어 있음# 이상치 확인해 보자
-summary(welfare$income)# 결측치가 12030개 있음, 최솟값이 0이 존재함 , 따라서 값이 0 또는 9999일 경우 결측처리 해보자
-# 이상치 결측처리welfare$income <- ifelse(welfare$income %in% c(0,9999), NA, welfare$income)
-# 다시 결측치 확인table(is.na(welfare$income))
-# 성별 월급 평균표 만들기sex_income <- welfare %>%   filter(!is.na(income)) %>%   group_by(sex) %>%   summarise(mean_income = mean(income))sex_income
-ggplot(data=sex_income, aes(x = sex, y= mean_income)) + geom_col()
-### 나. 나이와 월급의 관계 ----- 몇살때 월급을 가장 많이 받을 까 ? -----------# 1. 변수 검토하기class(welfare$birth)summary(welfare$birth)
-qplot(welfare$birth)# 태어난 년도 1900~2014, 모름/무응답 : 9999
-# 2. 이상치 확인summary(welfare$birth)
-# 3. 결측치 확인table(is.na(welfare$birth))  # 확인 결과 이상치 및 결측치 없음
-#만일 이상치가 있었다면 다음 작업이 필요하다. 즉, 이상치의 결측치 화 welfare$birth <- ifelse(welfare$birth == 9999, NA, welfare$birth)table(is.na(welfare$birth))
-# 4. 파생변수 생성 - 나이welfare$age <- 2015 - welfare$birth + 1summary(welfare$age)
+
+ 
+
+ 
+
+### 가. 성별에 따른
+월급 차이  ------- 성별에
+따라 월급이 다를까 ? 
+------------
+
+# 다음으로 월급변수의 전처리 작업을 수행한다.
+
+ 
+
+# 1. 월급변수 검토 및 전처리
+: 기준단위 1만원
+
+class(welfare$income)
+
+summary(welfare$income)
+
+qplot(welfare$income)
+
+# qplot() : 최댓값까지 표현됨, 0-1000까지만 표현되게 설정해보자
+
+qplot(welfare$income) + xlim(0,1000)
+
+ 
+
+# 2. 전처리
+
+# 월급은 1-9998 사이값, 모름 또는 무응답은 9999로 코딩된 상태로 조사되어 있음
+
+# 이상치 확인해 보자
+
+ 
+
+summary(welfare$income)
+
+# 결측치가 12030개
+있음, 최솟값이 0이 존재함 , 따라서 값이 0 또는 9999일
+경우 결측처리 해보자
+
+ 
+
+# 이상치 결측처리
+
+welfare$income <- ifelse(welfare$income
+%in% c(0,9999), NA, welfare$income)
+
+ 
+
+# 다시 결측치 확인
+
+table(is.na(welfare$income))
+
+ 
+
+# 성별 월급 평균표 만들기
+
+sex_income <- welfare %>% 
+
+ 
+filter(!is.na(income)) %>% 
+
+ 
+group_by(sex) %>% 
+
+ 
+summarise(mean_income = mean(income))
+
+sex_income
+
+ 
+
+ggplot(data=sex_income, aes(x = sex, y=
+mean_income)) + geom_col()
+
+ 
+
+ 
+
+### 나. 나이와 월급의
+관계 ----- 몇살때 월급을 가장 많이 받을 까 ?
+-----------
+
+# 1. 변수 검토하기
+
+class(welfare$birth)
+
+summary(welfare$birth)
+
+ 
+
+qplot(welfare$birth)
+
+# 태어난 년도 1900~2014,
+모름/무응답 : 9999
+
+ 
+
+# 2. 이상치 확인
+
+summary(welfare$birth)
+
+ 
+
+# 3. 결측치 확인
+
+table(is.na(welfare$birth))  # 확인 결과 이상치 및 결측치 없음
+
+ 
+
+#만일 이상치가 있었다면 다음 작업이 필요하다. 즉, 이상치의 결측치 화 
+
+welfare$birth <- ifelse(welfare$birth ==
+9999, NA, welfare$birth)
+
+table(is.na(welfare$birth))
+
+ 
+
+# 4. 파생변수 생성 - 나이
+
+welfare$age <- 2015 - welfare$birth + 1
+
+summary(welfare$age)
+
+ 
+
 qplot(welfare$age)
-# 5. 나이에 따른 월급 평균표 만들기age_income <- welfare %>%   filter(!is.na(income)) %>%   group_by(age) %>%    summarise(mean_income = mean(income))
+
+ 
+
+ 
+
+# 5. 나이에 따른 월급 평균표 만들기
+
+age_income <- welfare %>% 
+
+ 
+filter(!is.na(income)) %>% 
+
+ 
+group_by(age) %>%  
+
+ 
+summarise(mean_income = mean(income))
+
+ 
+
 head(age_income)
-ggplot(data = age_income, aes(x=age, y=mean_income)) + geom_line()
+
+ 
+
+ggplot(data = age_income, aes(x=age,
+y=mean_income)) + geom_line()
+
