@@ -1,0 +1,15 @@
+# R 실행  source 창에서 실행 : 블럭 설정하고 ctrl+enter# R console 창 클리어 : source 창에서 ctrl+L# 모든 변수제거 rm(list=ls()) 
+install.packages("package_name") # 패키지 설치library(package_name) # 패키지 이용시 실행vignette("package_name") # 패키지에 대한 간단한 설명을 pdf파일로 볼 수 있
+file.create("file_name.R") # working directory에 R파일 생성file.edit("file_name.R") # 파일 수정source("file_name.R") # 파일에 저장한 코드를 실행하기 위해 해줌
+# ----------------------------------------------------------------------------------------------------# R  기본 셋 : http://blog.naver.com/PostView.nhn?blogId=sorwd2001&logNo=220575760129&parentCategoryNo=&categoryNo=&viewDate=&isShowPopularPosts=false&from=postView
+# http://blog.naver.com/beyondanova/220947740863
+# R 공공 자료처리 : http://blog.naver.com/liberty264/220627758839# Word cloud site http://blog.naver.com/liberty264/220616866103
+# http://blog.naver.com/beyondanova/220947740863
+# # ----------------------------------------------------------------------------------------------------
+# ------------------------------ 2017_2_기초3# 데이터 분석 기초# 데이터 파악용 함수 : head()  tail()  View()  dim()  str()   summary()exam <- read.csv("csv_exam.csv")data.frame(exam) # 데이터 전체출력head(exam) # 데이터의 일부만 출력 head(exam, 10) # 데이터 프레임의 경우 ", 숫자" 지정하여 일부 표현 가능tail(exam) # 데이터 뒷부분 확인하기tail(exam, 5) # 데이터 뒷부분 중, 원하는 줄만큼 확인 가능View(exam) # 엑셀과 유사한 창으로 자료를 보여줌dim(exam) # 구성 행렬 크기 str(exam) # 데이터 속성 확인summary(exam) #요약된 통계량 표시  # Min(최솟값), 1st Qu(1사분위수 ; 하위 25%지점에 위치하는 값), Meadian(중앙위치값), Mean(평균값),   # 3rd Qu(하위 75%지점에 위치하는 값), Max(최댓값)
+# 과제 : 빅데이터 분석을 위한 1차 작업은 수집된 자료의 분석         # 2차 작업 : 필요한 자료 추출, 즉 가공작업         # 3차 작업 : 정량분석 - 가시화 도구         # 4차 작업 : 정성분석 - 신뢰성 평가/검정
+# ------------------------------------------------rm(list=ls())  # 작업한 모든 변수 clearls()objects()# http://blog.naver.com/sw4r/220947662194   꼭 읽어보기# http://blog.naver.com/sw4r/220947636803# 객체 - 1개 1개의 자료, 객체의 나열 - list  # 객체의 자료구조 - 7가지(스칼러, 벡터, 행렬, 배열, 리스트, 팩터, 데이터프레임)       # http://blog.naver.com/sw4r/220947706818
+
+# ------------------------------------------------# 지그드시 blog# http://blog.naver.com/liberty264/220999922431# http://blog.naver.com/liberty264/220984298909  R 기초 # http://blog.naver.com/liberty264/220992998669  R 통계
+# 그래프 그리기 ggpplot2, lattice, qplot(), ggmap, 
+# http://blog.naver.com/liberty264/221004390848 ggplot2 패키지  그래프 작성에 가장 많이 활용# http://blog.naver.com/liberty264/221064041168 lattice패키지 활용 그래프 작성# http://blog.naver.com/liberty264/221065202687 qplot() 패키지# http://blog.naver.com/liberty264/221065408166 ggmap 패키지# http://blog.naver.com/liberty264 3차원 산점도# http://blog.naver.com/liberty264/221018193084 구글 chart# http://blog.naver.com/liberty264/220982348293 Box plot# http://blog.naver.com/liberty264/220751221418 그해픽 함수
